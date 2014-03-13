@@ -34,7 +34,8 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Susy", "--main", "README.md"]
 
   dependencies = {
-    "sass" => "~> 3.3.0"
+    "sass" => "~> 3.3.0",
+    "su" => "~> 1.0.0.alpha.1"
   }
   # Project Dependencies
   if s.respond_to? :specification_version then

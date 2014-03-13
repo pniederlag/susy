@@ -14,7 +14,7 @@ you can theme Susy by writing your own syntax
 (or extending one of ours).
 
 We've written a powerful new :doc:`Default Syntax <settings>`,
-and we're keeping the old :doc:`susyone/index` available as well.
+and we're keeping the old :doc:`susyone` available as well.
 But why stop there?
 You can *create your own unique syntax*,
 or port over the language of existing tools like
@@ -69,8 +69,8 @@ as they are all relative to each other.
 
 .. _core-column-count:
 
-Column Count
-------------
+Susy Count
+----------
 
 Find the number of columns in a given layout.
 
@@ -91,7 +91,7 @@ for the sake of flexibility.
    .. code-block:: scss
 
      // input
-     $count: column-count(12);
+     $count: susy-count(12);
 
      // output
      $count: 12;
@@ -109,7 +109,7 @@ for the sake of flexibility.
    .. code-block:: scss
 
      // input
-     $count: column-count(1 2 4 3 1);
+     $count: susy-count(1 2 4 3 1);
 
      // output
      $count: 5;
@@ -123,8 +123,8 @@ for the sake of flexibility.
 
 .. _core-column-sum:
 
-Column Sum
-----------
+Susy Sum
+--------
 
 Find the total sum of column-units in a layout.
 
@@ -133,7 +133,7 @@ Find the total sum of column-units in a layout.
 - ``$spread``: ``false``/``narrow`` | ``wide`` | ``wider``
 
 Rather than counting how many columns there are,
-the ``column-sum`` function calculates
+the ``susy-sum`` function calculates
 the total number of grid units covered.
 It's a simple matter of adding together all the columns
 as well as the gutters between them.
@@ -141,10 +141,10 @@ as well as the gutters between them.
 .. code-block:: scss
 
   // input
-  $column-sum: column-sum(7, .5);
+  $susy-sum: susy-sum(7, .5);
 
   // output: 7 + (6 * .5) = 10
-  $column-sum: 10;
+  $susy-sum: 10;
 
 Most grids have one less gutter than column,
 but that's not always true.
@@ -158,7 +158,7 @@ has an equal number of columns and gutters.
 .. code-block:: scss
 
   // input
-  $wide-sum: column-sum(7, .5, wide);
+  $wide-sum: susy-sum(7, .5, wide);
 
   // output: 7 + (7 * .5) = 10.5
   $wide-sum: 10.5;
@@ -170,7 +170,7 @@ which we call a ``wider`` spread.
 .. code-block:: scss
 
   // input
-  $wider-sum: column-sum(7, .5, wider);
+  $wider-sum: susy-sum(7, .5, wider);
 
   // output: 7 + (8 * .5) = 11
   $wider-sum: 11;
@@ -180,18 +180,18 @@ This is all possible with asymmetrical grids as well.
 .. code-block:: scss
 
   // input
-  $column-sum: column-sum(1 2 4 2, 1/3);
+  $susy-sum: susy-sum(1 2 4 2, 1/3);
 
   // output: (1 + 2 + 4 + 2) + (3 * 1/3) = 10
-  $column-sum: 10;
+  $susy-sum: 10;
 
 
 -------------------------------------------------------------------------
 
 .. _core-column-span:
 
-Column Span
------------
+Susy Slice
+----------
 
 Return a subset of columns at a given location.
 
@@ -212,20 +212,20 @@ so that ``1`` is the first column,
 .. code-block:: scss
 
   // input
-  $sym-span: column-span(3, 2, 7);
-  $asym-span: column-span(3, 2, (1 2 3 5 4));
+  $sym-slice: susy-slice(3, 2, 7);
+  $asym-slice: susy-slice(3, 2, (1 2 3 5 4));
 
   // output: 3 columns, starting with the second
-  $sym-span: 3;
-  $asym-span: (2 3 5);
+  $sym-slice: 3;
+  $asym-slice: (2 3 5);
 
 
 -------------------------------------------------------------------------
 
 .. _core-column-span-sum:
 
-Column Span Sum
----------------
+Susy
+----
 
 Find the sum of a column-span.
 
@@ -236,17 +236,17 @@ Find the sum of a column-span.
 - ``$spread``: ``false``/``narrow`` | ``wide`` | ``wider``
 
 This is where it all comes together.
-``column-span-sum`` is the abstract version of
+``susy`` is the base version of
 :ref:`span <tools-span-function>` —
-the basic building-block for any grid system.
-It combines ``column-span`` with ``column-sum``
-to return the width of a given span.
+the core building-block for any grid system.
+It combines ``susy-span`` with ``susy-sum``
+to return the (still unitless) width of a given span.
 
 .. code-block:: scss
 
   // input
-  $sym-span: column-span-sum(3, 2, 7, .5);
-  $asym-span: column-span-sum(3, 2, (1 2 3 5 4), .5);
+  $sym-span: susy(3, 2, 7, .5);
+  $asym-span: susy(3, 2, (1 2 3 5 4), .5);
 
   // output
   $sym-span: 4;
@@ -287,11 +287,11 @@ Build Something New
 
 That's really all it takes to build a grid system.
 The rest is just syntax.
-Start with a column-span-sum.
+Start with ``susy``.
 
 .. code-block:: scss
 
-    $sum: column-span-sum(3, 2, 7);
+    $sum: susy(3, 2, 7);
 
 If you want static grids,
 you can multiply the results
@@ -310,7 +310,7 @@ to get a percentage.
 .. code-block:: scss
 
     // fluid
-    $context: column-span-sum(7);
+    $context: susy(7);
     $fluid: percentage($sum / $context);
 
 That's all it takes.

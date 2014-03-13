@@ -1,1 +1,2 @@
+require 'su'
 require 'susy'

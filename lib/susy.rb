@@ -3,6 +3,7 @@ susy_stylesheets_path = File.join(base_directory, 'sass')
 susy_templates_path = File.join(base_directory, 'templates')
 begin
   require 'compass'
+  require 'su'
   Compass::Frameworks.register('susy', :stylesheets_directory => susy_stylesheets_path, :templates_directory => susy_templates_path)
 rescue LoadError
   # compass not found, register on the Sass path via the environment.

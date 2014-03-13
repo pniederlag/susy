@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.1.0 - Unreleased
+------------------
+
+- Break core math out into it's own project:
+  `Su <http://ericam.github.com/su/>`_.
+
+
 2.0.0 — Mar 10 2013
 -------------------
 
